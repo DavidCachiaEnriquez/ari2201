@@ -55,7 +55,12 @@
           dy = -dy
           dx += Math.random() * 2 - 1 // add a random value between -1 and 1 to dx
           dy += Math.random() * 2 - 1 // add a random value between -1 and 1 to dy
+          // limit the maximum speed of the ball
+          dx = Math.min(Math.max(dx, -5), 5)
+          dy = Math.min(Math.max(dy, -5), 5)
         }
+        ballX += dx
+        ballY += dy
         for (var i = 0; i < bricks.length; i++) {
           var b = bricks[i]
           if (!b.active) continue
