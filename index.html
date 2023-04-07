@@ -51,7 +51,11 @@
         if (ballX-ballSize+dx < 0 || ballX+ballSize+dx > w) dx = -dx
         if (ballY-ballSize+dy < 0) dy = -dy
         if (ballY-ballSize> batY) return false
-        if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) dy = -dy
+        if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) {
+          dy = -dy
+          dx += Math.random() * 2 - 1 // add a random value between -1 and 1 to dx
+          dy += Math.random() * 2 - 1 // add a random value between -1 and 1 to dy
+        }
         ballX += dx
         ballY += dy
         for (var i = 0; i < bricks.length; i++) {
