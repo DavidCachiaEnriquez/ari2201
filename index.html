@@ -13,7 +13,7 @@
       c.width = w; c.height = h
 
       function init() {
-        bricks=[], ballX=w/2, ballY=h-100, dx=2, dy=-2 // set initial speed to 2
+        bricks=[], ballX=w/2, ballY=h-100, dx=1, dy=-1 // set initial speed to 2
         for (var y = 0; y < 4; y++) {
           for (var x = y; x < 10-y; x++) {
             bricks.push({x: 50+x*brickW, y: 50+y*brickH, active: true})
@@ -53,11 +53,11 @@
         if (ballY-ballSize> batY) return false
         if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) {
           dy = -dy
-          dx += Math.random() * 2 - 1 // add a random value between -1 and 1 to dx
-          dy += Math.random() * 2 - 1 // add a random value between -1 and 1 to dy
+          // dx += Math.random() * 2 - 1 // add a random value between -1 and 1 to dx
+          // dy += Math.random() * 2 - 1 // add a random value between -1 and 1 to dy
           // limit the maximum speed of the ball
-          dx = Math.min(Math.max(dx, -0.5), 0.5)
-          dy = Math.min(Math.max(dy, -0.5), 0.5)
+          dx = Math.min(Math.max(dx, -1), 1)
+          dy = Math.min(Math.max(dy, -1), 1)
         }
         ballX += dx
         ballY += dy
