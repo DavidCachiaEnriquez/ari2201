@@ -13,7 +13,7 @@
       c.width = w; c.height = h
 
       function init() {
-        bricks=[], ballX=w/2, ballY=h-100, dx=2, dy=-2
+        bricks=[], ballX=w/2, ballY=h-100, dx=Math.random()-2, dy=-2
         for (var y = 0; y < 4; y++) {
           for (var x = y; x < 10-y; x++) {
             bricks.push({x: 50+x*brickW, y: 50+y*brickH, active: true})
