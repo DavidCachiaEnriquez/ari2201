@@ -77,8 +77,8 @@
 
       document.addEventListener("keydown", function(e) {
         switch (e.keyCode) {
-          case 37: if (batX > batW) batX-=20; break
-          case 39: if (batX < w-batW) batX+=20; break
+          case 37: if (batX > batW/2) batX-=20; break
+          case 39: if (batX < w-batW/2) batX+=20; break
         }
       })
       init()
