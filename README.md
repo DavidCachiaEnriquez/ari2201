@@ -1,2 +1,3 @@
-# ari2201
-University project for the unit IAPT (ARI2201), titled "Playing Games via Gestures"
+# "Playing Games via Gestures" - IAPT (ARI2201)
+This repository houses my project for UOM unit ARI2201, which comprises the use of a <i>.html</i> file which contains a javascript implementation of the 1986 arcade game <b><i>Arkanoid</i></b>. 
+<br>The game has been altered to use hand gestures (pointing left or right) captured via a webcam to replace the regular keyboard inputs (moving left and right respectively)
