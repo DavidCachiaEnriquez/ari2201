@@ -56,8 +56,8 @@
           dx += Math.random() * 2 - 1 // add a random value between -1 and 1 to dx
           dy += Math.random() * 2 - 1 // add a random value between -1 and 1 to dy
           // limit the maximum speed of the ball
-          dx = Math.min(Math.max(dx, -1), 1)
-          dy = Math.min(Math.max(dy, -1), 1)
+          dx = Math.min(Math.max(dx, -0.5), 0.5)
+          dy = Math.min(Math.max(dy, -0.5), 0.5)
         }
         ballX += dx
         ballY += dy
@@ -83,8 +83,8 @@
 
       document.addEventListener("keydown", function(e) {
         switch (e.keyCode) {
-          case 37: if (batX > batW) batX-=20; break
-          case 39: if (batX < w-batW) batX+=20; break
+          case 37: if (batX > batW) batX-=30; break
+          case 39: if (batX < w-batW) batX+=30; break
         }
       })
       init()
