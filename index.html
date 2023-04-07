@@ -6,14 +6,14 @@
   <body>
     <canvas id="canvas"></canvas>
     <script>
-      var w=400, h=600, ballSize=10, brickW=30, brickH=20, batW=130, batH=20
+      var w=400, h=600, ballSize=10, brickW=30, brickH=20, batW=100, batH=20
       var ballX, ballY, dx, dy, bricks=[], batX=w/2, batY=h-50
       var c = document.getElementById("canvas")
       var ctx = canvas.getContext("2d")
       c.width = w; c.height = h
 
       function init() {
-        bricks=[], ballX=w/2, ballY=h-100, dx=1, dy=-1 // set initial speed to 2
+        bricks=[], ballX=w/2, ballY=h-100, dx=Math.random()-0.5, dy=-1
         for (var y = 0; y < 4; y++) {
           for (var x = y; x < 10-y; x++) {
             bricks.push({x: 50+x*brickW, y: 50+y*brickH, active: true})
@@ -51,14 +51,7 @@
         if (ballX-ballSize+dx < 0 || ballX+ballSize+dx > w) dx = -dx
         if (ballY-ballSize+dy < 0) dy = -dy
         if (ballY-ballSize> batY) return false
-        if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) {
-          dy = -dy
-          // dx += Math.random() * 2 - 1 // add a random value between -1 and 1 to dx
-          // dy += Math.random() * 2 - 1 // add a random value between -1 and 1 to dy
-          // limit the maximum speed of the ball
-          dx = Math.min(Math.max(dx, -1), 1)
-          dy = Math.min(Math.max(dy, -1), 1)
-        }
+        if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) dy = -dy
         ballX += dx
         ballY += dy
         for (var i = 0; i < bricks.length; i++) {
@@ -83,12 +76,12 @@
 
       document.addEventListener("keydown", function(e) {
         switch (e.keyCode) {
-          case 37: if (batX > batW) batX-=30; break
-          case 39: if (batX < w-batW) batX+=30; break
+          case 37: if (batX > batW) batX-=20; break
+          case 39: if (batX < w-batW) batX+=20; break
         }
       })
       init()
-      setInterval(game, 1)
+      setInterval(game, 20)
     </script>
   </body>
 </html>
