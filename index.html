@@ -144,6 +144,11 @@
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
+            if(prediction[0].probability > prediction[1].probability){
+              print("Card")
+            }else{
+              print(Case)
+            }
         }
     </script>
 
