@@ -142,7 +142,7 @@
             const classPrediction = prediction[0].className + ": " + prediction[0].probability.toFixed(2);
             labelContainer.childNodes[0].innerHTML = classPrediction;
 
-            const classPrediction = prediction[1].className + ": " + prediction[0].probability.toFixed(2);
+            classPrediction = prediction[1].className + ": " + prediction[0].probability.toFixed(2);
             labelContainer.childNodes[1].innerHTML = classPrediction;
 
         }
