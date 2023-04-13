@@ -108,17 +108,17 @@
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         window.requestAnimationFrame(loop);
-
-        labelContainer = document.getElementById("label-container");
-
-        for (let i = 0; i < maxPredictions; i++) { // and class labels
-          labelContainer.appendChild(document.createElement("div"));
-        }
+        // 
+        // labelContainer = document.getElementById("label-container");
+        //
+        // for (let i = 0; i < maxPredictions; i++) { // and class labels
+        //   labelContainer.appendChild(document.createElement("div"));
+        // }
       }
 
 
       async function loop() {
-        webcam.update(); // update the webcam frame
+        webcam.update();
         await predict();
         window.requestAnimationFrame(loop);
       }
