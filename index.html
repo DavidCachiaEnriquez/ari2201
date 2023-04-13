@@ -19,7 +19,7 @@
       var ctx = canvas.getContext("2d")
       c.width = w; c.height = h
 
-      function init() {
+      async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -120,7 +120,7 @@
           case 39: if (batX < w-batW/2) batX+=20; break
         }
       })
-      init()
+      async init()
       setInterval(game, 5)
 
     </script>
