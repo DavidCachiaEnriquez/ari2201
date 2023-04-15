@@ -33,6 +33,7 @@
       let model, webcam, labelContainer, maxPredictions;
 
       var w=500, h=600, ballSize=10, brickW=30, brickH=20, batW=100, batH=20
+      var numOfBricks = 0, clickFlag = 0
       var ballX, ballY, dx, dy, bricks=[], batX=w/2, batY=h-50
       var c = document.getElementById("canvas")
       var ctx = canvas.getContext("2d")
@@ -41,6 +42,7 @@
       async function hideButton() {
         var button = document.querySelector("button");
         button.style.display = "none";
+        clickFlag = 1
         runGame()
       }
 
@@ -56,6 +58,7 @@
             bricks.push({x: 50+x*brickW, y: 50+y*brickH, active: true})
           }
         }
+        numOfBricks = bricks.length
       }
 
       async function game() {
@@ -76,6 +79,7 @@
           if (!b.active) continue
           if (b.x < ballX+ballSize && ballX-ballSize < b.x+brickW && b.y < ballY+ballSize && ballY-ballSize < b.y+brickH) {
             b.active = false
+            numOfBricks -= 1
             dy = -dy
             break
           }
@@ -126,7 +130,7 @@
         webcam.update(); // update the webcam frame
         temp = await predict();
         moveBat(temp);
-
+        winCheck()
         window.requestAnimationFrame(loop);
       }
 
@@ -141,21 +145,27 @@
         }
 
         const classPrediction = prediction[maxIndex].className;
-        // console.log(classPrediction);
-
         return(classPrediction)
       }
 
       async function moveBat(temp){
-        console.log(ballY)
         if(temp === "Case"){
           if (batX > batW/2) batX-=20;
         }
         if(temp === "Card"){
           if (batX < w-batW/2) batX+=20;
         }
-        if(ballY == 561.5){
-          alert('Game over!')
+      }
+
+      async function winCheck(){
+        if(numOfBricks == 0){
+          if(clickFlag == 1){
+            alert("You Win!")
+            init()
+          }
+        }else if(ballY == 561.5){
+          alert("Game over!")
+          console.log(numOfBricks)
           init()
         }
       }
