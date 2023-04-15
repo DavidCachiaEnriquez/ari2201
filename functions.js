@@ -134,7 +134,6 @@ async function winCheck(){
     }
   }else if(ballY == 561.5){
     alert("Game over!")
-    console.log(numOfBricks)
     init()
   }
 }
