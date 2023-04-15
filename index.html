@@ -59,9 +59,7 @@
       }
 
       async function game() {
-        if (!move()) {
-          alert('Game over!')
-        }
+        move()
         draw()
       }
 
@@ -82,7 +80,6 @@
             break
           }
         }
-        return true
       }
 
       async function draw() {
@@ -150,7 +147,7 @@
       }
 
       async function moveBat(temp){
-        console.log(temp)
+        console.log(ballY)
         if(temp === "Case"){
           if (batX > batW/2) batX-=20;
         }
@@ -159,7 +156,7 @@
         }
         if(ballY == 561.5){
           alert('Game over!')
-          runGame()
+          location.reload(true)
         }
       }
 
