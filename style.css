@@ -1,11 +1,20 @@
-#start-button {
+#canvas{
+  display: block;
+  margin: 0 auto;
+}
+
+#titleScreen{
+  margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
-#canvas {
-  display: block;
-  margin: 0 auto;
+#startButton{
+  /* background-color: #e7e7e7; */
+  /* color: black; */
+  padding: 8px 8px;
+  font-size: 24px
 }

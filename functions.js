@@ -1,4 +1,4 @@
-const URL = "https://teachablemachine.withgoogle.com/models/-Nz7xYmY3/";
+const URL = "https://teachablemachine.withgoogle.com/models/ZmW6WyBU4/";
 let model, webcam, labelContainer, maxPredictions;
 
 var w=500, h=600, ballSize=10, brickW=30, brickH=20, batW=100, batH=20
@@ -114,6 +114,7 @@ async function predict() {
   }
 
   const classPrediction = prediction[maxIndex].className;
+  console.log(classPrediction)
   return(classPrediction)
 }
 
