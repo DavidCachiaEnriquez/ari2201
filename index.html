@@ -6,12 +6,27 @@
   </head>
 
   <body>
+    
+    <div id="wrapper">
+      <div id="webcam-container"></div>
+      <div id="game">
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
 
-    <canvas id="canvas"></canvas>
+    <script>
+        document.getElementById("webcam-container").hidden = true
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
     <div id="titleScreen">
+      <h1 id="title">"Playing Games via Gestures" - IAPT (ARI2201)<br></h1>
+
+      <p id="text">This repository houses my project for UOM unit ARI2201, which comprises the use of a .html file which contains 
+        a javascript implementation of the 1986 arcade game Arkanoid. The game has been altered to use hand gestures (pointing left or right) 
+        captured via a webcam to replace the regular keyboard inputs (moving left and right respectively)</p>
 
       <button id="startButton" onclick="hideButton()">Start Game</button>
     </div>

@@ -9,8 +9,8 @@ var ctx = canvas.getContext("2d")
 c.width = w; c.height = h
 
 async function hideButton() {
-  var button = document.querySelector("button");
-  button.style.display = "none";
+  document.getElementById("titleScreen").hidden = true
+  document.getElementById("webcam-container").hidden = false
   clickFlag = 1
   runGame()
 }
@@ -21,7 +21,8 @@ async function runGame(){
 }
 
 async function init() {
-  bricks=[], ballX=w/2, ballY=h-100, dx=Math.random()-0.5, dy=-1.5
+  document.getElementById("wrapper").hidden = false
+  bricks=[], ballX=w/2, ballY=h-100, dx=Math.random()-0.3, dy=-1
   for (var y = 0; y < 4; y++) {
     for (var x = y; x < 10-y; x++) {
       bricks.push({x: 50+x*brickW, y: 50+y*brickH, active: true})
@@ -41,8 +42,10 @@ async function move() {
   if (ballY-ballSize+dy < 0) dy = -dy
   if (ballY-ballSize> batY) return false
   if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) dy = -dy
+
   ballX += dx
   ballY += dy
+
   for (var i = 0; i < bricks.length; i++) {
     var b = bricks[i]
     if (!b.active) continue
@@ -93,6 +96,12 @@ async function initCamera() {
   await webcam.setup(); // request access to the webcam
   await webcam.play();
   window.requestAnimationFrame(loop);
+
+  document.getElementById("webcam-container").appendChild(webcam.canvas);
+    labelContainer = document.getElementById("label-container");
+    for (let i = 0; i < maxPredictions; i++) { // and class labels
+        labelContainer.appendChild(document.createElement("div"));
+    }
 }
 
 async function loop() {
@@ -114,7 +123,6 @@ async function predict() {
   }
 
   const classPrediction = prediction[maxIndex].className;
-  console.log(classPrediction)
   return(classPrediction)
 }
 
@@ -131,11 +139,15 @@ async function winCheck(){
   if(numOfBricks == 0){
     if(clickFlag == 1){
       alert("You Win!")
-      init()
+      document.getElementById("wrapper" ).hidden = true
+      document.getElementById("titleScreen").hidden = false
+      ballY = 0
     }
-  }else if(ballY == 561.5){
+  }else if(ballY == 561){
     alert("Game over!")
-    init()
+    document.getElementById("wrapper" ).hidden = true
+    document.getElementById("titleScreen").hidden = false
+    ballY = 0
   }
 }
 
