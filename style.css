@@ -36,6 +36,10 @@
   transform: translate(-50%, -50%);
 }
 #webcam-container {
-  width: 300px;
-  float:left;
+  width: 250px;
+  height: 250px;
+
+  position: absolute;
+  top: 15%;
+  left: -10%;
 }
