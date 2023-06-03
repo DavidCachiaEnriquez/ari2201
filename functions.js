@@ -42,9 +42,6 @@ async function game() {
 }
 
 async function move() {
-  console.log(dx)
-  console.log(dy)
-
   if (ballX-ballSize+dx < 0) dx = -dx
   if (ballX+ballSize+dx > w) dx = -dx
   if (ballY-ballSize+dy < 0) dy = -dy
@@ -129,6 +126,11 @@ async function predict() {
     }
   }
 
+  console.log(prediction[maxIndex].className, prediction[maxIndex].probability)
+  if(prediction[maxIndex].probability < 0.6){
+    return("Temp")
+  }
+
   const classPrediction = prediction[maxIndex].className;
   return(classPrediction)
 }
@@ -136,10 +138,10 @@ async function predict() {
 async function moveBat(temp){
     if(clickFlag == 1){
     if(temp === "Left"){
-      if (batX > batW/2) batX-=10;
+      if (batX > batW/2) batX-=5;
     }
     if(temp === "Right"){
-      if (batX < w-batW/2) batX+=10;
+      if (batX < w-batW/2) batX+=5;
     }
   }
 }
