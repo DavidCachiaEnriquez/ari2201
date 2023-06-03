@@ -1,6 +1,4 @@
-// const URL = "https://teachablemachine.withgoogle.com/models/dj5TAnPLc/";
-const URL = "./model/"
-
+const URL = "https://teachablemachine.withgoogle.com/models/dj5TAnPLc/";
 
 let model, webcam, labelContainer, maxPredictions;
 
