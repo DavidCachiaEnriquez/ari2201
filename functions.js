@@ -1,4 +1,7 @@
-const URL = "https://teachablemachine.withgoogle.com/models/ZmW6WyBU4/";
+// const URL = "https://teachablemachine.withgoogle.com/models/dj5TAnPLc/";
+const URL = "./model/"
+
+
 let model, webcam, labelContainer, maxPredictions;
 
 var w=500, h=600, ballSize=10, brickW=30, brickH=20, batW=100, batH=20
@@ -7,6 +10,7 @@ var ballX, ballY, dx, dy, bricks=[], batX=w/2, batY=h-50
 var c = document.getElementById("canvas")
 var ctx = canvas.getContext("2d")
 c.width = w; c.height = h
+var colours = []
 
 async function hideButton() {
   document.getElementById("titleScreen").hidden = true
@@ -22,10 +26,13 @@ async function runGame(){
 
 async function init() {
   document.getElementById("wrapper").hidden = false
-  bricks=[], ballX=w/2, ballY=h-100, dx=Math.random()-0.3, dy=-1
-  for (var y = 0; y < 4; y++) {
-    for (var x = y; x < 10-y; x++) {
+  bricks=[], ballX=w/2, ballY=h-100, dx=(Math.random()*0.5) + 0.25, dy=-1
+  colourPicks = ["#ff0000", "#ff7700", "#ffd900", "#59ff00", "#00eeff", "#5100ff", "#ff00e1"]
+
+  for (var y = 0; y < 7; y++) {
+    for (var x = 0; x < 13; x++) {
       bricks.push({x: 50+x*brickW, y: 50+y*brickH, active: true})
+      colours.push(colourPicks[y])
     }
   }
   numOfBricks = bricks.length
@@ -37,6 +44,9 @@ async function game() {
 }
 
 async function move() {
+  console.log(dx)
+  console.log(dy)
+
   if (ballX-ballSize+dx < 0) dx = -dx
   if (ballX+ballSize+dx > w) dx = -dx
   if (ballY-ballSize+dy < 0) dy = -dy
@@ -59,21 +69,22 @@ async function move() {
 }
 
 async function draw() {
-  drawRect('#eee', 0, 0, w, h)
-  drawCircle('#f00', ballX, ballY, ballSize)
+  drawRect('#e1e6e8', 0, 0, w, h, "#190026")
+  drawCircle('#00ffa6', ballX, ballY, ballSize)
   for (var i = 0; i < bricks.length; i++) {
     var b = bricks[i]
     if (!b.active) continue
-    drawRect('#0f0', b.x, b.y, brickW, brickH)
+    drawRect(colours[i], b.x, b.y, brickW, brickH, "#0b2a42")
   }
-  drawRect('#00f', batX-batW/2, batY, batW, batH)
+  drawRect('#00ffa6', batX-batW/2, batY, batW, batH, "#190026")
 }
 
-async function drawRect(color, x, y, w, h) {
+async function drawRect(color, x, y, w, h, s) {
   ctx.fillStyle = color
   ctx.beginPath()
   ctx.rect(x, y, w, h)
   ctx.fill()
+  ctx.strokeStyle = s;
   ctx.stroke()
 }
 
@@ -82,6 +93,8 @@ async function drawCircle(color, x, y, r) {
   ctx.beginPath()
   ctx.arc(x, y, r, 0, 2*Math.PI, false)
   ctx.fill()
+  ctx.strokeStyle = "#190026";
+  ctx.stroke()
 }
 
 async function initCamera() {
@@ -123,11 +136,13 @@ async function predict() {
 }
 
 async function moveBat(temp){
-  if(temp === "Case"){
-    if (batX > batW/2) batX-=20;
-  }
-  if(temp === "Card"){
-    if (batX < w-batW/2) batX+=20;
+    if(clickFlag == 1){
+    if(temp === "Left"){
+      if (batX > batW/2) batX-=10;
+    }
+    if(temp === "Right"){
+      if (batX < w-batW/2) batX+=10;
+    }
   }
 }
 
