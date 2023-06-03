@@ -1,4 +1,5 @@
-const URL = "https://teachablemachine.withgoogle.com/models/dj5TAnPLc/";
+// const URL = "https://teachablemachine.withgoogle.com/models/dj5TAnPLc/";
+const URL = "https://teachablemachine.withgoogle.com/models/ua5xBQ-wN/";
 
 let model, webcam, labelContainer, maxPredictions;
 
@@ -106,7 +107,9 @@ async function initCamera() {
   window.requestAnimationFrame(loop);
 
   document.getElementById("webcam-container").appendChild(webcam.canvas);
-}
+  document.getElementById("webcam-container").style.border = "1px solid black";
+
+  }
 
 async function loop() {
   webcam.update(); // update the webcam frame
@@ -126,10 +129,9 @@ async function predict() {
     }
   }
 
-  console.log(prediction[maxIndex].className, prediction[maxIndex].probability)
-  if(prediction[maxIndex].probability < 0.6){
-    return("Temp")
-  }
+  // if(prediction[maxIndex].probability < 0.4){
+  //   return("stop")
+  // }
 
   const classPrediction = prediction[maxIndex].className;
   return(classPrediction)
@@ -137,10 +139,10 @@ async function predict() {
 
 async function moveBat(temp){
     if(clickFlag == 1){
-    if(temp === "Left"){
+    if(temp === "left"){
       if (batX > batW/2) batX-=5;
     }
-    if(temp === "Right"){
+    if(temp === "right"){
       if (batX < w-batW/2) batX+=5;
     }
   }
