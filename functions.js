@@ -1,11 +1,10 @@
-// const URL = "https://teachablemachine.withgoogle.com/models/dj5TAnPLc/";
-const URL = "https://teachablemachine.withgoogle.com/models/ua5xBQ-wN/";
+  const URL = "https://teachablemachine.withgoogle.com/models/ua5xBQ-wN/";
 
 let model, webcam, labelContainer, maxPredictions;
 
-var w=500, h=600, ballSize=10, brickW=30, brickH=20, batW=100, batH=20
+var w=500, h=600, ballSize=10, brickW=30, brickH=20, padW=100, padH=20
 var numOfBricks = 0, clickFlag = 0
-var ballX, ballY, dx, dy, bricks=[], batX=w/2, batY=h-50
+var ballX, ballY, dx, dy, bricks=[], padX=w/2, padY=h-50
 var c = document.getElementById("canvas")
 var ctx = canvas.getContext("2d")
 c.width = w; c.height = h
@@ -46,8 +45,8 @@ async function move() {
   if (ballX-ballSize+dx < 0) dx = -dx
   if (ballX+ballSize+dx > w) dx = -dx
   if (ballY-ballSize+dy < 0) dy = -dy
-  if (ballY-ballSize> batY) return false
-  if (ballY+ballSize > batY && ballX+ballSize > batX-batW/2 && ballX-ballSize < batX+batW/2) dy = -dy
+  if (ballY-ballSize> padY) return false
+  if (ballY+ballSize > padY && ballX+ballSize > padX-padW/2 && ballX-ballSize < padX+padW/2) dy = -dy
 
   ballX += dx
   ballY += dy
@@ -72,7 +71,7 @@ async function draw() {
     if (!b.active) continue
     drawRect(colours[i], b.x, b.y, brickW, brickH, "#0b2a42")
   }
-  drawRect('#00ffa6', batX-batW/2, batY, batW, batH, "#190026")
+  drawRect('#00ffa6', padX-padW/2, padY, padW, padH, "#190026")
 }
 
 async function drawRect(color, x, y, w, h, s) {
@@ -108,13 +107,12 @@ async function initCamera() {
 
   document.getElementById("webcam-container").appendChild(webcam.canvas);
   document.getElementById("webcam-container").style.border = "1px solid black";
-
   }
 
 async function loop() {
   webcam.update(); // update the webcam frame
   temp = await predict();
-  moveBat(temp);
+  movePaddle(temp);
   winCheck()
   window.requestAnimationFrame(loop);
 }
@@ -129,21 +127,17 @@ async function predict() {
     }
   }
 
-  // if(prediction[maxIndex].probability < 0.4){
-  //   return("stop")
-  // }
-
   const classPrediction = prediction[maxIndex].className;
   return(classPrediction)
 }
 
-async function moveBat(temp){
+async function movePaddle(temp){
     if(clickFlag == 1){
     if(temp === "left"){
-      if (batX > batW/2) batX-=5;
+      if (padX > padW/2) padX-=5;
     }
     if(temp === "right"){
-      if (batX < w-batW/2) batX+=5;
+      if (padX < w-padW/2) padX+=5;
     }
   }
 }
